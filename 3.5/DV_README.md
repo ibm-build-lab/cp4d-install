@@ -4,7 +4,7 @@ Go [here](https://www.ibm.com/support/knowledgecenter/SSQNUZ_3.5.0/svc-dv/instal
 
 ## Install
 
-1. Ensure that you have run the `modifyVol.sh` to extend the image registry before this step. See [here](https://github.com/ibm-hcbt/cp4d-install/tree/main/3.5#install-additional-assemblies) for more details.
+1. Ensure that you have run the `modifyVol.sh` to extend the image registry before this step. Go [here](https://github.com/ibm-hcbt/cp4d-install/tree/main/3.5#install-additional-assemblies) for more details.
 
 2. Create a file `setkernelparams.yaml` with the following content
 
