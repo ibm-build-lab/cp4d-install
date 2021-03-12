@@ -4,7 +4,7 @@ Go [here](https://www.ibm.com/support/knowledgecenter/SSQNUZ_3.5.0/svc-dv/instal
 
 ## Install
 
-1. Ensure that you have run the modifyVol.sh before this step
+1. Ensure that you have run the `modifyVol.sh` to extend the image registry before this step
 
 2. Create a file `setkernelparams.yaml` with the following content
 
