@@ -73,7 +73,7 @@ Increase size of `openshift-image-registry`
 
     <git clone directory>/cp4d-install/modifyVol.sh 400
 
-Some services are hosted in separate repositories. If you plan to install any of the services listed in the following table, add the appropriate entries the `repo.yaml` file.  Go [here](https://www.ibm.com/support/knowledgecenter/SSQNUZ_3.5.0/cpd/install/installation-files.html) for more information.
+Some services are hosted in separate repositories. If you plan to install any of the services listed, add the appropriate entries the `repo.yaml` file.  Go [here](https://www.ibm.com/support/knowledgecenter/SSQNUZ_3.5.0/cpd/install/installation-files.html) for more information.
 
 ### To see what components are installed, run
 
