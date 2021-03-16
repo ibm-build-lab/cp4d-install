@@ -69,7 +69,11 @@ Go [here](https://www.ibm.com/support/knowledgecenter/SSQNUZ_3.5.0/svc-discovery
         size: 5Gi
    ```
 
-3. Prep cluster and install `edb-operator`:
+3. Get image-registry-location:
+
+    `oc get route -n openshift-image-registry`
+
+4. Prep cluster and install `edb-operator`:
 
     ```bash
     ./cpd-cli adm \
@@ -78,6 +82,8 @@ Go [here](https://www.ibm.com/support/knowledgecenter/SSQNUZ_3.5.0/svc-discovery
     --arch x86_64 \
     --namespace <namespace> –apply 
 
+    Replace <image-registry-location> from step 3 and run the installation command
+
     ./cpd-cli install \ 
     --repo ./repo.yaml \
     --assembly edb-operator \
@@ -85,7 +91,7 @@ Go [here](https://www.ibm.com/support/knowledgecenter/SSQNUZ_3.5.0/svc-discovery
     --arch x86_64 \
     --namespace <namespace> \
     --storageclass portworx-db-gp3-sc \
-    --transfer-image-to <Registry_location> \
+    --transfer-image-to <image-registry-location>/${NAMESPACE} \
     --cluster-pull-prefix $(oc registry info)/<namespace> \
     --latest-dependency \
     --cluster-pull-username=kubeadmin \
@@ -97,7 +103,7 @@ Go [here](https://www.ibm.com/support/knowledgecenter/SSQNUZ_3.5.0/svc-discovery
     --verbose
     ```
 
-4. Prep cluster and install `watson-discovery`:
+5. Prep cluster and install `watson-discovery`:
 
     ```bash
     ./cpd-cli adm \
@@ -105,13 +111,15 @@ Go [here](https://www.ibm.com/support/knowledgecenter/SSQNUZ_3.5.0/svc-discovery
     --assembly watson-discovery \
     --namespace <namespace> --apply
 
+    Replace <image-registry-location> from step 3 and run the installation command
+
     ./cpd-cli install \
     --repo ./repo.yaml \
     --assembly watson-discovery \
     --arch x86_64 \
     --namespace <namespace> \
     --storageclass portworx-db-gp3-sc \
-    --transfer-image-to <Registry_location> \
+    --transfer-image-to <image-registry-location>/${NAMESPACE} \
     --cluster-pull-prefix $(oc registry info)/<namespace> \
     --latest-dependency \
     --cluster-pull-username=kubeadmin \

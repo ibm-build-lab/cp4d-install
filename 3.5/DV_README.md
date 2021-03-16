@@ -158,7 +158,7 @@ spec:
 
 9. Install `dv` :
 
-    Update <image-registry-location> from step 7 and run the installation command
+    Replace <image-registry-location> from step 7 and run the installation command
 
     ```bash
     ./cpd-cli install \

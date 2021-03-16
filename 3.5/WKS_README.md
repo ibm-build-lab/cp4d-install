@@ -27,7 +27,11 @@ Go [here](https://www.ibm.com/support/knowledgecenter/SSQNUZ_3.5.0/svc-wks/knowl
         name: databases-registry
     ```
 
-2. Prepare the cluster and install:
+2. Get image-registry-location:
+
+    `oc get route -n openshift-image-registry`
+
+3. Prepare the cluster and install:
 
     ```bash
     cpd-cli adm --repo repo.yaml \
@@ -35,12 +39,14 @@ Go [here](https://www.ibm.com/support/knowledgecenter/SSQNUZ_3.5.0/svc-wks/knowl
     --namespace <namespace> \
     --apply
 
+    Replace <image-registry-location> from step 2 and run the installation command
+
     cpd-cli adm --repo repo.yaml \
     --assembly watson-ks \
     --arch x86_64 \
     --namespace cp4d-datahub \
     --storageclass portworx-shared-gp3 \
-    --transfer-image-to <Registry_location> \
+    --transfer-image-to <image-registry-location>/${NAMESPACE} \
     --cluster-pull-prefix $(oc registry info)/<namespace> \
     --latest-dependency \
     --cluster-pull-username=kubeadmin \
