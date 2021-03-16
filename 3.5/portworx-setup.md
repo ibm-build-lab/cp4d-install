@@ -223,7 +223,7 @@ For reference, full documentation on how to create an API key is [here](https://
 
 IMPORTANT: Ensure user creating API Key has sufficient permissions to work with cluster. They must be assigned the `Editor` platform role and the `Manager` service access role for `IBM Cloud Kubernetes Service`. For more information, see [User access permissions](https://cloud.ibm.com/docs/containers?topic=containers-access_reference).
 
-NOTE: Portworx won't install using a service id api key.
+NOTE: Since Portworx is provisioning infrastructure and infrastructure permissions can't be tied to a "Service ID" api key, need to use a "User" api key.
 
 - Select "Manage" -> "Access (IAM)" from IBM Cloud Console top menu
 - Select “API Keys” -> "Create"
