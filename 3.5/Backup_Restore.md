@@ -1,4 +1,4 @@
-# Back up and Restire CP4D Volume
+# Back up and Restore CP4D Volume
 
 ## CP4D Volume Backup and Restore Using cpdbr 2.0
 
@@ -25,7 +25,7 @@ Check cpdbr version
   ./cpd-cli backup-restore version
   ```
 
-  ```bash
+  ```console
   backup-restore
           Version: 2.0.0
           Build Date: 2020-10-28T23:00:47
