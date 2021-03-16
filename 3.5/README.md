@@ -65,7 +65,7 @@ Run the following command (add `--dry-run` to preview first) to install:
 **NOTE**: If using Portworx, make sure `portworx-shared-gp3` storage class is created and listed instead of `ibmc-file-gold-gid`. Go [here](https://www.ibm.com/support/producthub/icpdata/docs/content/SSQNUZ_latest/cpd/install/portworx-storage-classes.html)
  for details
 
-## Install Additional Assemblies
+## Install/Upgrade Assemblies
 
 To determine supported storage classes for each assembly, go [here](https://www.ibm.com/support/knowledgecenter/SSQNUZ_3.5.0/sys-reqs/services_prereqs.html#services_prereqs__hw-reqs).
 
@@ -84,3 +84,5 @@ Some services are hosted in separate repositories. If you plan to install any of
 ### [Install Watson Knowledge Studio](./WKS_README.md)
 
 ### [Install Data Virtualization](./DV_README.md)
+
+### [Upgrade Watson Knowledge Catalog](./Upgrading_WKC.md)
