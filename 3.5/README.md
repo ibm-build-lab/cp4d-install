@@ -20,7 +20,7 @@ See [system requirements for IBM Cloud Pak for Data](https://www.ibm.com/support
     git clone https://github.ibm.com/hcbt/cp4d-install
     <git clone directory>/cp4d-install/preInstall.sh <namespace> <cluster_name>
 
-## Obtain Command Line Installer installation files. Go [here](https://www.ibm.com/support/knowledgecenter/SSQNUZ_latest/cpd/install/installation-files.html) for more information.
+## Obtain Command Line Installer installation files. Go [here](https://www.ibm.com/support/knowledgecenter/SSQNUZ_latest/cpd/install/installation-files.html) for more information
 
 Download [latest](https://github.com/IBM/cpd-cli/releases) installer.
 
@@ -40,7 +40,7 @@ Run this command:
 
     image-registry-openshift-image-registry.jah-test31-data-cluster-c0b572361ba41c9eef42d4d51297b04b-0000.us-east.containers.appdomain.cloud/<namespace>
 
-## Set up cluster and install control plane. Go [here](https://www.ibm.com/support/knowledgecenter/SSQNUZ_latest/cpd/install/service_accts.html) for more information 
+## Set up cluster and install control plane. Go [here](https://www.ibm.com/support/knowledgecenter/SSQNUZ_latest/cpd/install/service_accts.html) for more information
 
 Set up cluster:
 
@@ -86,3 +86,5 @@ Some services are hosted in separate repositories. If you plan to install any of
 ### [Install Data Virtualization](./DV_README.md)
 
 ### [Upgrade Watson Knowledge Catalog](./Upgrading_WKC.md)
+
+### [Configure SSO with Okta or similar IDP](./SSO_README.md)
