@@ -2,18 +2,18 @@
 
 ## Overview
 
-Cloud Pak for Data can be configured to use external authenitcation through a SAML provider. If this is to be implemented, it should be implemented immediately after installation of the base and before the addition of any end-users to CPD. These steps are based on the [documentation for single sign-on](https://www.ibm.com/support/knowledgecenter/SSQNUZ_3.5.0/cpd/install/saml-sso.html).
+Cloud Pak for Data can be configured to use external authentication through a SAML provider. If this is to be implemented, it should be implemented immediately after installation of the base and before the addition of any end-users to CP4D. These steps are based on the [documentation for single sign-on](https://www.ibm.com/support/knowledgecenter/SSQNUZ_3.5.0/cpd/install/saml-sso.html).
 
 To understand authentication flow when using SAML, see the following diagram (from: [https://developer.okta.com/docs/concepts/saml/](https://developer.okta.com/docs/concepts/saml/) ).
 
 ![saml flow](./images/saml_guidance_saml_flow.png)
 
-For Cloud Pak for Data, the CDP platform will be the Service Provider and in the example Okta will be the Identity Provider.
+For Cloud Pak for Data, the CP4D platform will be the Service Provider and in the example Okta will be the Identity Provider.
 
 Follow these steps to set up SSO:
 
 * [Add application to the Identity Provider](#add-application-to-the-identity-provider)
-* [Update configuration on CPD](#update-configuration-on-cpd)
+* [Update configuration on CP4D](#update-configuration-on-cpd)
 * [Add external users and test](#add-external-users-and-test)
 * [Disable the default admin user](#disable-the-default-admin-user)
 
@@ -30,11 +30,11 @@ In Okta, you will be prompted for an application name which can be "Cloud Pak fo
     echo "https://$cpdhost/auth/login/sso/callback"
     ```
 
-* Define a Service Provider entity id - this is also referred to as the **issuer** in the CPD documentation. If unset, it will default to `ibm_privatecloud`. In this example the Service Provider entity id will be `cp4d-partner-roks`.
+* Define a Service Provider entity id - this is also referred to as the **issuer** in the CP4D documentation. If unset, it will default to `ibm_privatecloud`. In this example the Service Provider entity id will be `cp4d-partner-roks`.
 
-    If you will use userids with no special formatting (e.g. not an email address with a `@` in the middle of the string), select the Name ID format to be **Unspecified**. If you will use userids in an email address format, change the format to **EmailAddress**. You can leave the Application username as the default as an **additional attribute** will be added in the configuration to return the user identifier in the SAML assertion. The value selected here will determine the value used in configuring CPD. If using **Unspecified** the CPD `identifierFormat` should be: `urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified` and when using **EmailAddress** the `identifierFormat` should be `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`.
+    If you will use userids with no special formatting (e.g. not an email address with a `@` in the middle of the string), select the Name ID format to be **Unspecified**. If you will use userids in an email address format, change the format to **EmailAddress**. You can leave the Application username as the default as an **additional attribute** will be added in the configuration to return the user identifier in the SAML assertion. The value selected here will determine the value used in configuring CP4D. If using **Unspecified** the CP4D `identifierFormat` should be: `urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified` and when using **EmailAddress** the `identifierFormat` should be `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`.
 
-* Add an additional attribute needs to be added to specify the user identity. Presently the `nameID` property in the Okta SAML assertion is not parsed, requiring this additional attribute. In the **Attribute Statements (optional)** section add an attribute with label `username`, and specify the preferred format. For the value, select either `user.email` if the email is to be used, or if a simple string like the left-hand-side of the Okta login should be used, type in an expression like: `String.substringBefore(user.login, "@")`
+* An additional attribute needs to be added to specify the user identity. Presently the `nameID` property in the Okta SAML assertion is not parsed, requiring this additional attribute. In the **Attribute Statements (optional)** section add an attribute with label `username`, and specify the preferred format. For the value, select either `user.email` if the email is to be used, or if a simple string like the left-hand-side of the Okta login should be used, type in an expression like: `String.substringBefore(user.login, "@")`
 
     ![custom attribute](./images/saml_additional_attribute.png)
 
@@ -46,7 +46,7 @@ Copy the following data:
 
 * X509 Certificate. This will be used for the `idpCert` property in the saml config file. When adding this to the file, remove the opening and closing `-----BEGIN CERTIFICATE-----` and `-----END CERTIFICATE-----` and remove the hard returns in the file. The value for this property must be in a single line (see example later)
 
-## Update Configuration on CPD
+## Update Configuration on CP4D
 
 Enter the properties gathered from the IDP configuration step into a `samlConfig.json` file. When complete the minimum version of the file will look like this for simple username string identifiers (instead of an email address identifier):
 
@@ -85,7 +85,7 @@ Enter into a web browser the CP4D dashboard URL - the user should be immediately
 
 ## Disable the default admin user
 
-Once the IDP is confirmed to be working as intended and an official (non-default) Administrative user (or users) are able to authenticate, the included `admin` user can be [removed the CP4D](https://www.ibm.com/support/knowledgecenter/SSQNUZ_3.5.0/cpd/admin/remove-admin.html). After verifying that another user has Admin access to all required catalogs and categories, run this command (replacing `_namespace_` with the CP4D namespace):
+Once the IDP is confirmed to be working as intended and an official (non-default) Administrative user (or users) are able to authenticate, the included `admin` user can be [removed from CP4D](https://www.ibm.com/support/knowledgecenter/SSQNUZ_3.5.0/cpd/admin/remove-admin.html). After verifying that another user has Admin access to all required catalogs and categories, run this command (replacing `_namespace_` with the CP4D namespace):
 
 ```console
 oc exec -it -n _namespace_ $(oc get pod -n _namespace_ -l component=usermgmt | tail -1 | cut -f1 -d\ ) -- bash -c "/usr/src/server-src/scripts/manage-user.sh --disable-user admin"
