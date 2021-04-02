@@ -172,7 +172,7 @@ If attached correctly, you will see `ibm.io/attachstatus: attached`
 
 #### Provision VPC block storage
 
-Create 1 VPC block storage volume for each worker (minimum of 3):
+Create 1 VPC block storage volume for **each** worker (minimum of 3):
 
     ibmcloud is volume-create <volume-name> 10iops-tier <vpc zone> --capacity <size>
 
@@ -181,17 +181,17 @@ For example:
     ibmcloud is volume-create cpd-pwx-vol01 10iops-tier us-east-1 --capacity 200
     ibmcloud is volume-create cpd-pwx-vol02 10iops-tier us-east-1 --capacity 200
     ibmcloud is volume-create cpd-pwx-vol03 10iops-tier us-east-1 --capacity 200
+    ibmcloud is volume-create cpd-pwx-vol04 10iops-tier us-east-1 --capacity 200
 
 #### Attach storage to VPC worker nodes
 
 Retrieve IAM token, resource group and cluster.  Set environment variables to save typing in later commands.
 
-    IAM_TOKEN=$(ibmcloud iam oauth-tokens --output json | jq -r '.iam_token')
-    RESOURCE_GROUP=$(ibmcloud target --output json | jq -r '.resource_group.guid')
-    CLUSTER=<clustername>
+    export IAM_TOKEN=$(ibmcloud iam oauth-tokens --output json | jq -r '.iam_token')
+    export RESOURCE_GROUP=$(ibmcloud target --output json | jq -r '.resource_group.guid')
+    export CLUSTER=<clustername>
 
 List storage volumes:
-
 
     ibmcloud is volumes
 
@@ -206,8 +206,6 @@ Using the id of the desired worker node and the storage volume, use CLI command 
 For Example:
 
     ibmcloud ks storage attachment create --cluster $CLUSTER --volume 214099980 --worker kube-c0mktgsd0b2lo0bik8q0-cp4dpartner-default-000001f6
-    ibmcloud ks storage attachment create --cluster $CLUSTER --volume 214100004 --worker kube-c0mktgsd0b2lo0bik8q0-cp4dpartner-default-00000281
-    ibmcloud ks storage attachment create --cluster $CLUSTER --volume 214100042 --worker kube-c0mktgsd0b2lo0bik8q0-cp4dpartner-default-00000314 
 
 Verify attachments for each worker:
 
