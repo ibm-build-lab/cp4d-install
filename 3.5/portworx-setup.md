@@ -209,11 +209,9 @@ For Example:
     ibmcloud ks storage attachment create --cluster $CLUSTER --volume 214100004 --worker kube-c0mktgsd0b2lo0bik8q0-cp4dpartner-default-00000281
     ibmcloud ks storage attachment create --cluster $CLUSTER --volume 214100042 --worker kube-c0mktgsd0b2lo0bik8q0-cp4dpartner-default-00000314 
 
-Verify attachments:
+Verify attachments for each worker:
 
     curl -X GET "https://containers.cloud.ibm.com/v2/storage/getAttachments?cluster=$CLUSTER&worker=<worker_ID>" --header "X-Auth-Resource-Group-ID: $RESOURCE_GROUP" --header "Authorization: $IAM_TOKEN"
-
-    curl -X GET "https://containers.cloud.ibm.com/v2/storage/getAttachments?cluster=$CLUSTER&worker=kube-bvc11mbw0n2a9mccenlg-timropwxvpc-default-000002a7" --header "X-Auth-Resource-Group-ID: $RESOURCE_GROUP" --header "Authorization: $IAM_TOKEN" {"volume_attachments":[{"id":"0757-1e3db03e-e9bb-44ba-b423-14570a3511e6","volume":{"name":"timro-pwx-vol01","id":"r014-aef666d3-5072-4900-a1b2-23a69cb3f96b"},"device":{"id":"0757-1e3db03e-e9bb-44ba-b423-14570a3511e6-8xbd9"},"name":"volume-attachment","status":"attached","type":"data"},{"id":"0757-6a52d8da-3192-4ac9-b78d-3fa3e402be4f","volume":{"name":"gab-wistful-stimulate-nutmeg","id":"r014-54a8d1d0-b679-4c7e-bec6-b91deb30e98f"},"device":{"id":"0757-6a52d8da-3192-4ac9-b78d-3fa3e402be4f-x5rql"},"name":"volume-attachment","status":"attached","type":"boot"}]}
 
 ## 4. Install Portworx on cluster
 
