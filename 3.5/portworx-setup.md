@@ -11,7 +11,7 @@ For reference, full documentation on how to provision an OpenShift cluster is [h
 From a terminal window, log in to IBM Cloud using the [cli](https://www.ibm.com/cloud/cli) and set the target `resource_group` to the group with your target OpenShift cluster.
 
     ibmcloud login -sso
-    ibmcloud target -r us-south -g <resource_group>
+    ibmcloud target -r <region> -g <resource_group>
     ibmcloud oc clusters
     ibmcloud oc cluster config -c <cluster_name> –-admin
 
