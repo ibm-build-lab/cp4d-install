@@ -61,7 +61,7 @@ Check cpdbr version
   # Push image to internal registry
   docker login -u kubeadmin -p $(oc whoami -t) $IMAGE_REGISTRY
   docker tag docker.io/ibmcom/cpdbr:2.0.0-${BUILD_NUM}-${CPU_ARCH} $IMAGE_REGISTRY/$NAMESPACE/cpdbr:2.0.0-${BUILD_NUM}-${CPU_ARCH}
-  docker push $IMAGE_REGISTRY/$NAMESPACE/cpdbr:2.0.0-${BUILD_NUM}-${CPU_ARCH} --tls-verify=false
+  docker push $IMAGE_REGISTRY/$NAMESPACE/cpdbr:2.0.0-${BUILD_NUM}-${CPU_ARCH}
   ```
 5. Check that the image tag has the same build number as the cpdbr CLI version (e.g. 747):
 
