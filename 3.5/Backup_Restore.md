@@ -59,7 +59,7 @@ Check cpdbr version
   # Pull cpdbr image from Docker Hub
   docker pull docker.io/ibmcom/cpdbr:2.0.0-${BUILD_NUM}-${CPU_ARCH}
   # Push image to internal registry
-  docker login -u kubeadmin -p $(oc whoami -t) $IMAGE_REGISTRY --tls-verify=false
+  docker login -u kubeadmin -p $(oc whoami -t) $IMAGE_REGISTRY
   docker tag docker.io/ibmcom/cpdbr:2.0.0-${BUILD_NUM}-${CPU_ARCH} $IMAGE_REGISTRY/$NAMESPACE/cpdbr:2.0.0-${BUILD_NUM}-${CPU_ARCH}
   docker push $IMAGE_REGISTRY/$NAMESPACE/cpdbr:2.0.0-${BUILD_NUM}-${CPU_ARCH} --tls-verify=false
   ```
