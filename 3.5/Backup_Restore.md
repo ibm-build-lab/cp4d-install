@@ -54,11 +54,10 @@ Check cpdbr version
   echo $NAMESPACE
   CPU_ARCH=`uname -m`
   echo $CPU_ARCH
-  BUILD_NUM=<build-number>
   echo $BUILD_NUM
  
   # Pull cpdbr image from Docker Hub
-  docker pull \ docker.io/ibmcom/cpdbr:2.0.0-${BUILD_NUM}-${CPU_ARCH}
+  docker pull docker.io/ibmcom/cpdbr:2.0.0-${BUILD_NUM}-${CPU_ARCH}
   # Push image to internal registry
   docker login -u kubeadmin -p $(oc whoami -t) $IMAGE_REGISTRY --tls-verify=false
   docker tag docker.io/ibmcom/cpdbr:2.0.0-${BUILD_NUM}-${CPU_ARCH} $IMAGE_REGISTRY/$NAMESPACE/cpdbr:2.0.0-${BUILD_NUM}-${CPU_ARCH}
