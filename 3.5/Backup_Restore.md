@@ -105,7 +105,7 @@ For cpdbr volume backup/restore, a repository secret named `cpdbr-repo-secret` n
   ```bash
   echo -n 'restic' > RESTIC_PASSWORD
 
-  oc create secret generic -n cp4d cpdbr-repo-secret \
+  oc create secret generic -n $NAMESPACE cpdbr-repo-secret \
       --from-file=./RESTIC_PASSWORD
   ```
 
@@ -116,7 +116,7 @@ For cpdbr volume backup/restore, a repository secret named `cpdbr-repo-secret` n
 Before performing a backup, scale down deployments/statefulsets in the namespace using cpdbr.
 
     ```bash
-    ./cpd-cli backup-restore quiesce -n cp4d --log-level=debug --verbose
+    ./cpd-cli backup-restore quiesce -n $NAMESPACE --log-level=debug --verbose
     ```
 
 2.	Backup secrets in the namespace
@@ -134,31 +134,31 @@ Create a directory and run the following script to back up secrets.  Create a ta
 Initialize cpdbr with the PVC name.
 
     ```bash
-    ./cpd-cli backup-restore init -n cp4d --pvc-name cpdbr-pvc --image-prefix=image-registry.openshift-image-registry.svc:5000/cp4d --log-level=debug --verbose --provider=local
+    ./cpd-cli backup-restore init -n $NAMESPACE --pvc-name cpdbr-pvc --image-prefix=image-registry.openshift-image-registry.svc:5000/$NAMESPACE --log-level=debug --verbose --provider=local
     ```
 
 4. Create a backup of volumes used in the namespace (with services already terminated).  The name of the backup should include the namespace, to avoid collision with other namespaces.
 
     ```bash
-    ./cpd-cli backup-restore volume-backup create --namespace cp4d mycp4dbackup1 --skip-quiesce=true --log-level=debug --verbose
+    ./cpd-cli backup-restore volume-backup create --namespace $NAMESPACE mycp4dbackup1 --skip-quiesce=true --log-level=debug --verbose
     ```
 
 5. List volume backups
 
     ```bash
-    ./cpd-cli backup-restore volume-backup list -n cp4d --log-level=debug --verbose
+    ./cpd-cli backup-restore volume-backup list -n $NAMESPACE --log-level=debug --verbose
     ```
 
 6.  Check volume backup status
 
     ```bash
-    ./cpd-cli backup-restore volume-backup status --namespace cp4d mycp4dbackup1 --log-level=debug --verbose
+    ./cpd-cli backup-restore volume-backup status --namespace $NAMESPACE mycp4dbackup1 --log-level=debug --verbose
     ```
 
 7. Check volume backup logs
 
     ```bash
-    ./cpd-cli backup-restore volume-backup logs mycp4dbackup1 --namespace=cp4d --log-level=debug --verbose
+    ./cpd-cli backup-restore volume-backup logs mycp4dbackup1 --namespace=$NAMESPACE --log-level=debug --verbose
     ```
 
 8.	Bring up services
@@ -166,13 +166,13 @@ Initialize cpdbr with the PVC name.
 After the off-line backup is complete, you may choose to bring the services online by scaling up the deployments/statefulsets.
 
     ```bash
-    ./cpd-cli backup-restore unquiesce -n cp4d --log-level=debug --verbose
+    ./cpd-cli backup-restore unquiesce -n $NAMESPACE --log-level=debug --verbose
     ```
 
 9. Terminate cpdbr (for clean-up purposes; run before upgrade)
 
     ```bash
-    ./cpd-cli backup-restore reset --namespace cp4d --force --log-level=debug --verbose
+    ./cpd-cli backup-restore reset --namespace $NAMESPACE --force --log-level=debug --verbose
     ```
 
 ###	Restore
@@ -190,7 +190,7 @@ After the off-line backup is complete, you may choose to bring the services onli
   ```bash
   echo -n 'restic' > RESTIC_PASSWORD
 
-  oc create secret generic -n cp4d cpdbr-repo-secret \
+  oc create secret generic -n $NAMESPACE cpdbr-repo-secret \
       --from-file=./RESTIC_PASSWORD
   ```
 
@@ -208,19 +208,19 @@ Extract the tar file containing the yaml files from the source cluster.  Apply t
 Before performing a restore, scale down deployments/statefulsets in the namespace using cpdbr.
 
     ```bash
-    ./cpd-cli backup-restore quiesce -n cp4d --log-level=debug --verbose
+    ./cpd-cli backup-restore quiesce -n $NAMESPACE --log-level=debug --verbose
     ```
 
 6. Initialize cpdbr with the shared volume PVC
 
     ```bash
-    ./cpd-cli backup-restore init -n cp4d --pvc-name cpdbr-pvc --image-prefix=image-registry.openshift-image-registry.svc:5000/cp4d --log-level=debug --verbose --provider=local
+    ./cpd-cli backup-restore init -n $NAMESPACE --pvc-name cpdbr-pvc --image-prefix=image-registry.openshift-image-registry.svc:5000/$NAMESPACE --log-level=debug --verbose --provider=local
     ```
 
 7. Upload the backup archive to the shared volume PVC
 
     ```bash
-    ./cpd-cli backup-restore volume-backup upload --namespace cp4d –f cpd-volbackups-mycp4dbackup1-data.tar
+    ./cpd-cli backup-restore volume-backup upload --namespace $NAMESPACE –f cpd-volbackups-mycp4dbackup1-data.tar
     ```
 
 8. Create a volume restore from the backup
@@ -229,30 +229,30 @@ Before performing a restore, scale down deployments/statefulsets in the namespac
 Since services are not running at this point, volume data can be restored.
 
     ```bash
-    ./cpd-cli backup-restore volume-restore create --from-backup mycp4dbackup1 --namespace cp4d mycp4drestore1 --skip-quiesce=true --log-level=debug --verbose
+    ./cpd-cli backup-restore volume-restore create --from-backup mycp4dbackup1 --namespace $NAMESPACE mycp4drestore1 --skip-quiesce=true --log-level=debug --verbose
     ```
 
 9. List volume restores
 
     ```bash
-    ./cpd-cli backup-restore volume-restore list --namespace=cp4d --log-level=debug --verbose
+    ./cpd-cli backup-restore volume-restore list --namespace=$NAMESPACE --log-level=debug --verbose
     ```
 
 10.  Check volume restore status
 
     ```bash
-    ./cpd-cli backup-restore volume-restore status --namespace cp4d mycp4drestore1
+    ./cpd-cli backup-restore volume-restore status --namespace $NAMESPACE mycp4drestore1
     ```
 
 11.  Check volume restore logs
 
     ```bash
-    ./cpd-cli backup-restore volume-restore logs mycp4drestore1 --namespace=cp4d --log-level=debug --verbose
+    ./cpd-cli backup-restore volume-restore logs mycp4drestore1 --namespace=$NAMESPACE --log-level=debug --verbose
     ```
 
 12.	Edit the target namespace and change the following annotations to have the same values as the source namespace.
 
-oc edit namespace cp4d
+oc edit namespace $NAMESPACE
 
 openshift.io/sa.scc.mcs: s0:c25,c10
 openshift.io/sa.scc.supplemental-groups: 1000660000/10000
@@ -264,7 +264,7 @@ openshift.io/sa.scc.uid-range: 1000660000/10000
 Bring the services online by scaling up the deployments/statefulsets.
   
     ```bash
-    ./cpd-cli backup-restore unquiesce -n cp4d --log-level=debug --verbose
+    ./cpd-cli backup-restore unquiesce -n $NAMESPACE --log-level=debug --verbose
     ```
 
 14.	 Commands when cleanup is needed
@@ -272,13 +272,13 @@ Bring the services online by scaling up the deployments/statefulsets.
 14a.  Delete volume restore (for cleanup purposes only)
 
     ```bash
-    ./cpd-cli backup-restore volume-restore delete mycp4drestore1 --namespace=cp4d --log-level=debug --verbose
+    ./cpd-cli backup-restore volume-restore delete mycp4drestore1 --namespace=$NAMESPACE --log-level=debug --verbose
     ```
 
 14b.  Terminate cpdbr (for cleanup purposes; run before upgrade)
 
     ```bash
-    ./cpd-cli backup-restore reset --namespace cp4d --force --log-level=debug --verbose
+    ./cpd-cli backup-restore reset --namespace $NAMESPACE --force --log-level=debug --verbose
     ```
 
 ###	 Troubleshooting
