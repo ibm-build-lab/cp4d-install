@@ -78,7 +78,7 @@ cpdbr requires a shared volume PVC to be created and bounded for use in its init
 Use the following yaml file to create an NFS volume named cpdbr-pvc. Name the yaml file cpdbr-pvc.yaml.
 
   ```yaml
-  apiVersion: v1
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: cpdbr-pvc 
@@ -88,13 +88,12 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 200Gi
+      storage: 600Gi
   ```
 
-Replace Project with the project where the IBM Cloud Pak for Data control plane is installed
 
   ```bash
-  oc apply -f cpdbr-pvc.yaml --namespace Project
+  oc apply -f cpdbr-pvc.yaml --namespace $NAMESPACE
   ```
 
 2. Create a secret to store backup credentials
