@@ -7,7 +7,7 @@ kind: Subscription
 metadata:
   annotations:
   name: ibm-cpd-ws-operator-catalog-subscription
-  namespace: zen    # Pick the project that contains the Cloud Pak for Data operator
+  namespace: ibm-common-services    # Pick the project that contains the Cloud Pak for Data operator
 spec:
   channel: v2.0
   installPlanApproval: Automatic
@@ -32,7 +32,11 @@ spec:
     accept: true
     license: Enterprise     # Specify the license you purchased
   version: 4.0.0
-  storageVendor: ""
   storageClass: ibmc-file-gold-gid          #if you use a different storage class, replace it with the appropriate storage class                   
 EOF
+```
+
+3. Get the status of Watson Studio (ws-cr):
+```bash
+oc get WS ws-cr -o jsonpath='{.status.wsStatus} {"\n"}'
 ```

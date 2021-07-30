@@ -83,7 +83,7 @@ spec:
     license: Enterprise     # Specify the license you purchased
   version: 4.0.0
   storageClass: ibmc-file-gold-gid     # See the guidance in "Information you need to complete this task"
-  install_wkc_core_only: true     # To install the core version of the service, remove the comment tagging from the beginning of the line.
+  # install_wkc_core_only: true     # To install the core version of the service, remove the comment tagging from the beginning of the line.
   docker_registry_prefix: cp.icr.io/cp/cpd
   useODLM: true
 EOF

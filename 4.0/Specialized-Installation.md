@@ -1,13 +1,14 @@
-# Installing CP4D 4.0 on ROKS cluster
-
 ## Creating projects (namespaces) on ROKS cluster
 1. Create these projects:
 
     a. ibm-common-services project
 
-    b. zen project
+    b. cp4d project
 
-2. Create the operator group for Express installation or visit step 3 under [Procedure](https://www.ibm.com/docs/en/cloud-paks/cp-data/4.0?topic=tasks-creating-projects-namespaces) for specialized installation:
+    c. cpd-operators
+
+## Specialized Installation
+1. If IBM Cloud Pak foundational services is not installed, create the operator group for the IBM Cloud Pak foundational services project. The following example uses the recommended project name (ibm-common-services):
 ```bash
 cat <<EOF |oc apply -f -
 apiVersion: operators.coreos.com/v1alpha2
@@ -18,6 +19,20 @@ metadata:
 spec:
   targetNamespaces:
   - ibm-common-services
+EOF
+```
+
+2. Create the operator group for the IBM Cloud Pak for Data platform operator project. The following example uses the recommended project name (cpd-operators):
+```bash
+cat <<EOF |oc apply -f -
+apiVersion: operators.coreos.com/v1alpha2
+kind: OperatorGroup
+metadata:
+  name: operatorgroup
+  namespace: cpd-operators
+spec:
+  targetNamespaces:
+  - cpd-operators
 EOF
 ```
 
@@ -69,6 +84,7 @@ NAME            STATUS   ROLES           AGE   VERSION
 10.188.91.218   Ready    master,worker   92m   v1.19.0+b00ba52
 10.188.91.251   Ready    master,worker   92m   v1.19.0+b00ba52
 ```
+
 
 6. Create the IBM Operator catalog source.
 ```bash
@@ -255,6 +271,39 @@ spec:
 EOF
 ```
 
+## Installing IBM Cloud Pak foundational services
+1. Create the appropriate operator subscription for your environment:
+```bash
+cat <<EOF |oc apply -f -
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: ibm-common-service-operator
+  namespace: ibm-common-services
+spec:
+  channel: v3
+  installPlanApproval: Automatic
+  name: ibm-common-service-operator
+  source: ibm-operator-catalog
+  sourceNamespace: openshift-marketplace
+EOF
+```
+
+2. Verify the status of ibm-common-service-operator:
+```bash
+oc --namespace ibm-common-services get csv
+```
+
+3. Verify that the custom resource definitions were created:
+```bash
+oc get crd | grep operandrequest
+```
+
+4. Confirm that IBM Cloud Pak foundational services API resources are available:
+```bash
+oc api-resources --api-group operator.ibm.com
+```
+
 ## Creating operator subscriptions
 1. Create the appropriate operator subscription for the scheduling service:
 ```bash
@@ -267,7 +316,7 @@ metadata:
     operators.coreos.com/ibm-cpd-scheduling-operator.aks: ""
     velero.io/exclude-from-backup: "true"
   name: ibm-cpd-scheduling-catalog-subscription
-  namespace: ibm-common-services    # Pick the project that contains the Cloud Pak for Data operator
+  namespace: cp4d    # Pick the project that contains the Cloud Pak for Data operator
 spec:
   channel: alpha
   installPlanApproval: Automatic
@@ -284,7 +333,7 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
   name: cpd-operator
-  namespace: ibm-common-services # Pick the project that contains the Cloud Pak for Data operator
+  namespace: cp4d # Pick the project that contains the Cloud Pak for Data operator
 spec:
   channel: stable-v1
   installPlanApproval: Automatic
@@ -294,102 +343,7 @@ spec:
 EOF
 ```
 
-## Creating operator subscriptions for services (Optional & choose the services you plan to install)
-### Data Virtualization
-1. Create the appropriate operator subscription for your environment:
-```bash
-cat <<EOF |oc apply -f -
-apiVersion: operators.coreos.com/v1alpha1
-kind: Subscription
-metadata:
-  name: ibm-dv-operator-catalog-subscription
-  namespace: ibm-common-services # Pick the project that contains the Cloud Pak for Data operator
-spec:
-  channel: v1.0
-  installPlanApproval: Automatic
-  name: ibm-dv-operator
-  source: ibm-operator-catalog
-  sourceNamespace: openshift-marketplace
-EOF
-```
-
-### Db2 Data Management Console
-1. Create the appropriate operator subscription for your environment:
-```bash
-cat <<EOF |oc apply -f -
-apiVersion: operators.coreos.com/v1alpha1
-kind: Subscription
-metadata:
-  name: ibm-dmc-operator-subscription
-  namespace: ibm-common-services # Pick the project that contains the Cloud Pak for Data operator
-spec:
-  channel: v1.0
-  installPlanApproval: Automatic
-  name: ibm-dmc-operator
-  source: ibm-operator-catalog
-  sourceNamespace: openshift-marketplace
-EOF
-```
-
-### Db2 Warehouse
-1. Create the Db2U operator subscription:
-```bash
-cat <<EOF |oc apply -f -
-apiVersion: operators.coreos.com/v1alpha1
-kind: Subscription
-metadata:
-  name: ibm-db2uoperator-catalog-subscription
-  namespace: ibm-common-services    # Pick the project that contains the Cloud Pak for Data operator
-spec:
-  channel: v1.1
-  name: db2u-operator
-  installPlanApproval: Automatic
-  source: ibm-operator-catalog
-  sourceNamespace: openshift-marketplace
-EOF
-```
-
-2. Create the Db2 Warehouse operator subscription.
-```bash
-cat <<EOF |oc apply -f -
-apiVersion: operators.coreos.com/v1alpha1
-kind: Subscription
-metadata:
-  name: ibm-db2wh-cp4d-operator-catalog-subscription
-  namespace: ibm-common-services    # Pick the project that contains the Cloud Pak for Data operator
-spec:
-  channel: v1.0
-  name: ibm-db2wh-cp4d-operator
-  installPlanApproval: Automatic
-  source: ibm-operator-catalog
-  sourceNamespace: openshift-marketplace
-EOF
-```
-
-### Watson Knowledge Catalog
-1. Create the appropriate operator subscription for your environment:
-```bash
-cat <<EOF |oc apply -f -
-apiVersion: operators.coreos.com/v1alpha1
-kind: Subscription
-metadata:
-  labels:
-    app.kubernetes.io/instance:  ibm-cpd-wkc-operator-catalog-subscription
-    app.kubernetes.io/managed-by: ibm-cpd-wkc-operator
-    app.kubernetes.io/name:  ibm-cpd-wkc-operator-catalog-subscription
-  name: ibm-cpd-wkc-operator-catalog-subscription
-  namespace: ibm-common-services # Pick the project that contains the Cloud Pak for Data operator
-spec:
-    channel: v1.0
-    installPlanApproval: Automatic
-    name: ibm-cpd-wkc
-    source: ibm-operator-catalog
-    sourceNamespace: openshift-marketplace
-EOF
-```
-
-### Watson Studio
-1. Create the appropriate operator subscription for your environment:
+3. Optional - Create Operator subsciption for Watson Studio
 ```bash
 cat <<EOF |oc apply -f -
 apiVersion: operators.coreos.com/v1alpha1
@@ -397,7 +351,7 @@ kind: Subscription
 metadata:
   annotations:
   name: ibm-cpd-ws-operator-catalog-subscription
-  namespace: ibm-common-services    # Pick the project that contains the Cloud Pak for Data operator
+  namespace: cp4d    # Pick the project that contains the Cloud Pak for Data operator
 spec:
   channel: v2.0
   installPlanApproval: Automatic
@@ -407,132 +361,30 @@ spec:
 EOF
 ```
 
-## Create custom SCC
-The following services require custom security context constraints:
-- Watson™ Knowledge Catalog
-- Db2®
-- Db2 Warehouse
-- Db2 Big SQL
-- Data Virtualization
-- OpenPages®
-
-When you install Db2, the Db2 operator creates the custom SCC, service accounts, roles, and role bindings. Db2 Warehouse, Db2 Big SQL, Data Virtualization, and OpenPages use the SCC capabilities in Db2.
-
-When you install Watson Knowledge Catalog, you must create the [custom SCCs manually](https://www.ibm.com/docs/en/cloud-paks/cp-data/4.0?topic=sccs-creating-custom-in-watson-knowledge-catalog).
-
-
-## Specify node settings
-The following services require specific node settings:
-- Data Virtualization
-- Db2
-- Db2 Big SQL
-- Db2 Warehouse
-- Jupyter Notebooks with Python 3.7 for GPU
-- OpenPages
-- Watson Knowledge Catalog
-- Watson Machine Learning Accelerator
-- Watson Studio
-
-1. Load balancer timeout settings
-Use the following command to set the server-side timeout for the HAProxy route to 360 seconds:
-```bash
-oc annotate route zen-cpd --overwrite haproxy.router.openshift.io/timeout=360s
-```
-
-2. Kernel parameter settings
-- The kernel.sem value for SEMMNS must be 1024000 for Watson Knowledge Catalog service.
-- The kernel.sem value for SEMOPM must be at least 100 for Data Virtualization service.
-
-2.a Create a custom node-level tune with the following content.
+## Installing Cloud Pak for Data
+1. Enable the IBM Cloud Pak for Data platform operator and the IBM Cloud Pak foundational services operator to watch the project where you will install IBM Cloud Pak for Data:
 ```bash
 cat <<EOF |oc apply -f -
-apiVersion: tuned.openshift.io/v1
-kind: Tuned
+apiVersion: operator.ibm.com/v1
+kind: NamespaceScope
 metadata:
-  name: cp4d-wkc-ipc
-  namespace: openshift-cluster-node-tuning-operator
+  name: cpd-operators
+  namespace: cpd-operators        # (Default) Replace with the Cloud Pak for Data platform operator project name 
 spec:
-  profile:
-  - name: cp4d-wkc-ipc
-    data: |
-      [main]
-      summary=Tune IPC Kernel parameters on OpenShift Worker Nodes running WKC Pods
-      [sysctl]
-      kernel.shmall = 33554432
-      kernel.shmmax = 68719476736
-      kernel.shmmni = 32768
-      kernel.sem = 250 1024000 100 32768
-      kernel.msgmax = 65536
-      kernel.msgmnb = 65536
-      kernel.msgmni = 32768
-      vm.max_map_count = 262144
-  recommend:
-  - match:
-    - label: node-role.kubernetes.io/worker
-    priority: 10
-    profile: cp4d-wkc-ipc
+  namespaceMembers:
+  - cpd-operators                 # (Default) Replace with the Cloud Pak for Data platform operator project name
+  - cp4d                  # Replace with the project where you will install Cloud Pak for Data
 EOF
 ```
-
-2.b Configure kubelet to allow Db2U to make syscalls as needed. Update all of the nodes to use a custom KubletConfig:
-
-    ```bash
-    cat << EOF | oc apply -f -
-    apiVersion: machineconfiguration.openshift.io/v1
-    kind: KubeletConfig
-    metadata:
-    name: db2u-kubelet
-    spec:
-    machineConfigPoolSelector:
-        matchLabels:
-        db2u-kubelet: sysctl
-    kubeletConfig:
-        allowedUnsafeSysctls:
-        - "kernel.msg*"
-        - "kernel.shm*"
-        - "kernel.sem"
-    EOF
-```
-
-2.c Update the label on the machineconfigpool:
-```bash
-oc label machineconfigpool 10.185.199.39 db2u-kubelet=sysctl
-```
-
-```Error from server (NotFound): machineconfigpools.machineconfiguration.openshift.io "worker" not found```
-
-2.d Wait for the cluster to reboot. Then, run the following command to verify that the machineconfigpool is updated:
-```bash
-oc get machineconfigpool
-```
-
-## Installation
-1. Express Installation (Follow doc for [Specialized Installation](https://www.ibm.com/docs/en/cloud-paks/cp-data/4.0?topic=installing-cloud-pak-data))
-Create an operand request to grant permission to the IBM Cloud Pak for Data platform operator and the IBM Cloud Pak foundational services operator to manage the project where you plan to install Cloud Pak for Data:
-
-```bash
-cat <<EOF |oc apply -f -
-apiVersion: operator.ibm.com/v1alpha1
-kind: OperandRequest
-metadata:
-  name: empty-request
-  namespace: cp4d        # Replace with the project where you will install Cloud Pak for Data
-spec:
-  requests: []
-EOF
-```
-
-`error: unable to recognize "STDIN": no matches for kind "OperandRequest" in version "operator.ibm.com/v1alpha1"`
 
 2. Create a custom resource to install Cloud Pak for Data.
-Create a custom resource with the following format:
 ```bash
 cat <<EOF |oc apply -f -
 apiVersion: cpd.ibm.com/v1
 kind: Ibmcpd
 metadata:
   name: ibmcpd-cr                                     # This is the recommended name, but you can change it
-  namespace: zen                             # Replace with the project where you will install Cloud Pak for Data
+  namespace: cp4d                             # Replace with the project where you will install Cloud Pak for Data
 spec:
   license:
     accept: true
@@ -543,24 +395,5 @@ spec:
 EOF
 ```
 
-## Verifying the installation
-1. Change to the project where you installed Cloud Pak for Data. For example:
-```bash
-oc project zen
-```
-
-2. Get the status of the control plane (lite-cr):
-```bash
-oc get ZenService lite-cr -o jsonpath="{.status.zenStatus}{'\n'}"
-```
-The Cloud Pak for Data control plane is ready when the command returns Completed.
-
-3. Get the URL of the Cloud Pak for Data web client:
-```bash
-oc get ZenService lite-cr -o jsonpath="{.status.url}{'\n'}"
-```
-
-4. Get the initial password for the admin user:
-```bash
-oc extract secret/admin-user-details --keys=initial_admin_password --to=-
-```
+Error - 
+`error: unable to recognize "STDIN": no matches for kind "Ibmcpd" in version "cpd.ibm.com/v1"`
