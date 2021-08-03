@@ -516,7 +516,7 @@ apiVersion: operator.ibm.com/v1alpha1
 kind: OperandRequest
 metadata:
   name: empty-request
-  namespace: cp4d        # Replace with the project where you will install Cloud Pak for Data
+  namespace: zen        # Replace with the project where you will install Cloud Pak for Data
 spec:
   requests: []
 EOF
