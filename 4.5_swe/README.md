@@ -31,7 +31,7 @@ The following steps are customized from the steps [here](https://github.com/IBM/
 4. Run **./launch.sh**. This will start a container image with the prompt opened in the `/terraform` directory, pointed to the repo directory.
 5. Create a working copy of the terraform by running **./setup-workspace.sh**. 
     ```bash
-    ./setup-workspace.sh -s odf -n cp4d45 -r ca-tor 
+    ./setup-workspace.sh -n cp4d45 -r ca-tor 
     ```
    **Note**: a resource group will be created and all resources will be prefixed from the -n value   
 6. Change the directory to the current workspace where the automation was configured 
@@ -49,8 +49,10 @@ From the **/workspace/current** directory, change directory into **105-ibm-vpc-o
 ```
 
 ## Install Data Foundation
-
 Currently the Data Foundation automation just installs the Cloud Pak for Data Lite components.  Eventually, it will add additional services on.
+
+### Setup
+The following steps are customized from the steps [here](https://github.com/IBM/automation-data-foundation#set-up-environment-credentials):
 
 1. Clone this repository to your local SRE laptop or into a secure terminal. Open a shell into the cloned directory.
     ```shell
@@ -95,6 +97,10 @@ Currently the Data Foundation automation just installs the Cloud Pak for Data Li
 6. Change the directory to the current workspace where the automation was configured (e.g. `/workspaces/current`).
 7. Inspect **cluster.tfvars** to see if there are any variables that should be changed. (The **setup-workspace.sh** script has generated **cluster.tfvars** with default values based on the environment variables set above and can be used without updates, if desired.)
 #### Run all the Terraform layers automatically
+
+### Run Data Foundation automation
+
+This will enable ODF as the storage solution and install Cloud Pak for Data 4.5 Control Plane
 
 From the **/workspace/current** directory, run the following:
 
