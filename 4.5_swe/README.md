@@ -40,7 +40,7 @@ These steps follow the steps [here](https://github.com/IBM/automation-ibmcloud-i
   TF_VAR_ibmcloud_api_key=<api key for account 2058805>
   TF_VAR_gitops_repo_host=github.com
   TF_VAR_gitops_repo_username=annumberhocker
-  TF_VAR_gitops_repo_token=************************ # Goto to profiles settings, developer settings, choose `repo` and `delete_repo` permissions.
+  TF_VAR_gitops_repo_token=************************ # Go to profiles settings, developer settings, choose `repo` and `delete_repo` permissions.
   TF_VAR_gitops_repo_org=ann-gitops # I created my own org under my private username to isolate the repos created by ArgoCD 
   ```
 
