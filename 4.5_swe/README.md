@@ -39,12 +39,15 @@ These steps follow the steps [here](https://github.com/IBM/automation-ibmcloud-i
     ./setup-workspace.sh -s odf -n cp4d45 -r ca-tor. # Note, a resource group will be created and all resources will be prefixed from the -n value   
     ```
 
-6. Change the directory to the current workspace where the automation was configured (e.g. `/workspaces/current`).
+6. Change the directory to the current workspace where the automation was configured 
+    ```
+    cd /workspaces/current/
+    ```
 7. Inspect **cluster.tfvars** to see if there are any variables that should be changed. (The **setup-workspace.sh** script has generated **cluster.tfvars** with default values based on the environment variables set above and can be used without updates, if desired.)
 
 ### Run only the 105 layer
 
-From the **/workspace/current** directory, run change directory into each of the 105 subdirectories and run the following:
+From the **/workspace/current** directory, run change directory into **105-ibm-vpc-openshift** and run:
 
 ```shell
 ./apply.sh
