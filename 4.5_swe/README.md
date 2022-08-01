@@ -31,8 +31,9 @@ The following steps are customized from the steps [here](https://github.com/IBM/
 4. Run **./launch.sh**. This will start a container image with the prompt opened in the `/terraform` directory, pointed to the repo directory.
 5. Create a working copy of the terraform by running **./setup-workspace.sh**. 
     ```bash
-    ./setup-workspace.sh -s odf -n cp4d45 -r ca-tor # Note, a resource group will be created and all resources will be prefixed from the -n value   
+    ./setup-workspace.sh -s odf -n cp4d45 -r ca-tor 
     ```
+   **Note**, a resource group will be created and all resources will be prefixed from the -n value   
 6. Change the directory to the current workspace where the automation was configured 
     ```
     cd /workspaces/current/
