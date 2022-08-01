@@ -85,7 +85,7 @@ Currently the Data Foundation automation just installs the Cloud Pak for Data Li
 5. Create a working copy of the terraform by running **./setup-workspace.sh**. The script makes a copy of the terraform in `/workspaces/current` and set up "cluster.tfvars" and "gitops.tfvars" files populated with default values. The **setup-workspace.sh** script has a number of optional arguments.
 
     ```bash
-    ./setup-workspace.sh -s odf -n cp4d45 -r ca-tor. # Note, a resource group will be created and all resources will be prefixed from the -n value   
+    ./setup-workspace.sh -s odf -n cp4d45 -r ca-tor # Note, a resource group will be created and all resources will be prefixed from the -n value   
     ```
     
 6. Change the directory to the current workspace where the automation was configured (e.g. `/workspaces/current`).
