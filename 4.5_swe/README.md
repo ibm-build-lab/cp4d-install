@@ -1,4 +1,4 @@
-# Installing Cloud Pak for Data 4.5 using the Software Everywhere utilities
+# Installing Cloud Pak for Data 4.5 using the Software Everywhere automation
 
 These are steps to install Cloud Pak for Data 4.5 on a VPC cluster using automation created by the Software Everywhere modules.
 
