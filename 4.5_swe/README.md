@@ -41,7 +41,7 @@ The following steps are customized from the steps [here](https://github.com/IBM/
     ./launch.sh 
     ```
     This will start a container image with the prompt opened in the `/terraform` directory, pointed to the repo directory.
-6. Create a working copy of the terraform by running **./setup-workspace.sh**. 
+6. Each automation you run will create a workspace that will be persisted as long as the Docker container is installed. Therefore, we need to create a new working copy of this automation terraform by running **./setup-workspace.sh**. This script has a number of optional arguments, run with -h to see all the options:
     ```bash
     ./setup-workspace.sh -n cp4d45 -r ca-tor -s odf
     ```
@@ -105,7 +105,7 @@ The following steps are customized from the steps [here](https://github.com/IBM/
     ```
     ./launch.sh 
     ```
-6. Run **./setup-workspace.sh**. This will create a working copy of the terraform in `/workspaces/current` and sets up **cluster.tfvars** and **gitops.tfvars** files populated with default values. The **setup-workspace.sh** script has a number of optional arguments for our purposes, we are only interested in the `odf` storage option.
+6. Run **./setup-workspace.sh**. This will create a working copy of the terraform in `/workspaces/current` and sets up **terraform.tfvars**  populated with default values. The **setup-workspace.sh** script has a number of optional arguments run with -h to see all the options:
 
     ```bash
     ./setup-workspace.sh -s odf -n cp4d45 -p ibm
