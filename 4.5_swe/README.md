@@ -12,13 +12,13 @@ https://github.com/IBM/automation-data-foundation
 
 This automation will be running within a container, for best results, make sure you have a license for Docker Desktop.
 
-## Create the OpenShift container
+## Create the OpenShift cluster
 NOTE: The scripts at the `automation-ibmcloud-infra-openshift` level will run the `1-quickstart` automation by default.  Therefore, do not run anything from the `1-quickstart` subdirectory
 
 ### Setup
 The following steps are customized from the steps [here](https://github.com/IBM/automation-ibmcloud-infra-openshift/blob/main/README.md#setup):
 
-1. Clone this repository to your local SRE laptop or into a secure terminal. Open a shell into the cloned directory.
+1. Clone this repository to your local laptop or into a secure terminal. Open a shell into the cloned directory.
     ```shell
     git clone github.com/IBM/automation-ibmcloud-infra-openshift
     cd automation-ibmcloud-infra-openshift
@@ -45,18 +45,20 @@ The following steps are customized from the steps [here](https://github.com/IBM/
     ```bash
     ./setup-workspace.sh -n cp4d45 -r ca-tor -s odf
     ```
+    This creates a "workspace" where you will run the terraform.
    **Note**: a resource group will be created and all resources will be prefixed from the -n value 
 6. Change the directory to the current workspace where the automation was configured 
     ```
     cd /workspaces/current/
     ```
-7. Inspect **cluster.tfvars** and **gitops.tfvars** to see if there are any variables that should be changed. (The **setup-workspace.sh** script has generated these with default values based on the environment variables set above and can be used without updates, if desired.)
+7. Inspect **cluster.tfvars** to see if there are any variables that should be changed. (The **setup-workspace.sh** script has generated these with default values based on the environment variables set above)
 
 ### Run only the OpenShift Cluster modules
 
 From the **/workspace/current** directory, change directory into **105-ibm-vpc-openshift** and run:
 
 ```shell
+cd /workspace/current/105-ibm-vpc-openshift
 ./apply.sh
 ```
 
@@ -79,7 +81,7 @@ The following steps are customized from the steps [here](https://github.com/IBM/
 
    For example:
       ```bash
-      TF_VAR_ibmcloud_api_key=<api key for account 2058805>
+      TF_VAR_ibmcloud_api_key=**********************
       TF_VAR_gitops_repo_host=github.com
       TF_VAR_gitops_repo_username=annumberhocker
       TF_VAR_gitops_repo_token=************************ # Go to profiles settings, developer settings, choose `repo` and `delete_repo` permissions.
@@ -90,6 +92,7 @@ The following steps are customized from the steps [here](https://github.com/IBM/
 
       ```
    Where
+   - **TF_VAR_ibmcloud_api_key** - API key for account where cluster resides
    - **TF_VAR_gitops_repo_host** - (Optional) The host for the git repository (e.g. github.com, bitbucket.org). Supported Git servers are GitHub, Github Enterprise, Gitlab, Bitbucket, Azure DevOps, and Gitea. If this value is left commented out, the automation will default to using Gitea.
    - **TF_VAR_gitops_repo_username** - The username on git server host that will be used to provision and access the gitops repository. If the `gitops_repo_host` is blank this value will be ignored and the Gitea credentials will be used.
    - **TF_VAR_gitops_repo_token** - The personal access token that will be used to authenticate to the git server to provision and access the gitops repository. (The user should have necessary access in the org to create the repository and the token should have `delete_repo` permission.) If the host is blank this value will be ignored and the Gitea credentials will be used.
