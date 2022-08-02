@@ -28,8 +28,12 @@ The following steps are customized from the steps [here](https://github.com/IBM/
     cp credentials.template credentials.properties
     ```
 3. Uncomment and provide value for the **TF_VAR_ibmcloud_api_key** variable (API key for the IBM Cloud account where the infrastructure will be provisioned) in **credentials.properties**.
-4. Run **./launch.sh**. This will start a container image with the prompt opened in the `/terraform` directory, pointed to the repo directory.
-5. Create a working copy of the terraform by running **./setup-workspace.sh**. 
+4. Run 
+    ```
+    ./launch.sh 
+    ```
+    This will start a container image with the prompt opened in the `/terraform` directory, pointed to the repo directory.
+6. Create a working copy of the terraform by running **./setup-workspace.sh**. 
     ```bash
     ./setup-workspace.sh -n cp4d45 -r ca-tor 
     ```
