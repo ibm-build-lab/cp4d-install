@@ -28,16 +28,24 @@ The following steps are customized from the steps [here](https://github.com/IBM/
     cp credentials.template credentials.properties
     ```
 3. Uncomment and provide value for the **TF_VAR_ibmcloud_api_key** variable (API key for the IBM Cloud account where the infrastructure will be provisioned) in **credentials.properties**.
-4. Run 
+4. Update **terraform.tfvars.template-quickstart** to uncomment and set for required infrastructure.  For example, for this exercise we are using: 
+    ```
+    cluster_subnets__count="1"
+    worker_count="6"
+    cluster_flavor="bx2.16x64"
+    cluster_force_delete_storage="true"
+    odf_namespace_name="odf"
+    ```
+6. Run 
     ```
     ./launch.sh 
     ```
     This will start a container image with the prompt opened in the `/terraform` directory, pointed to the repo directory.
 6. Create a working copy of the terraform by running **./setup-workspace.sh**. 
     ```bash
-    ./setup-workspace.sh -n cp4d45 -r ca-tor 
+    ./setup-workspace.sh -n cp4d45 -r ca-tor -s odf
     ```
-   **Note**: a resource group will be created and all resources will be prefixed from the -n value   
+   **Note**: a resource group will be created and all resources will be prefixed from the -n value 
 6. Change the directory to the current workspace where the automation was configured 
     ```
     cd /workspaces/current/
@@ -76,7 +84,7 @@ The following steps are customized from the steps [here](https://github.com/IBM/
       TF_VAR_gitops_repo_username=annumberhocker
       TF_VAR_gitops_repo_token=************************ # Go to profiles settings, developer settings, choose `repo` and `delete_repo` permissions.
       TF_VAR_gitops_repo_org=ann-gitops # I created my own org under my private username to isolate the repos created by ArgoCD 
-      TF_VAR_server_url=
+      TF_VAR_server_url=https://c104-e.ca-tor.containers.cloud.ibm.com:31655
       TF_VAR_cluster_login_token=******************
       TF_VAR_entitlement_key=****************************************
 
@@ -91,20 +99,20 @@ The following steps are customized from the steps [here](https://github.com/IBM/
    - **TF_VAR_entitlement_key** - The entitlement key used to access the IBM software images in the container registry. Visit https://myibm.ibm.com/products-services/containerlibrary to get the key
 
 4. Run **./launch.sh**. This will start a container image with the prompt opened in the `/terraform` directory, pointed to the repo directory.
-5. Create a working copy of the terraform by running **./setup-workspace.sh**. The script makes a copy of the terraform in `/workspaces/current` and set up "cluster.tfvars" and "gitops.tfvars" files populated with default values. The **setup-workspace.sh** script has a number of optional arguments.
+    ```
+    ./launch.sh 
+    ```
+6. Run **./setup-workspace.sh**. This will create a working copy of the terraform in `/workspaces/current` and sets up **cluster.tfvars** and **gitops.tfvars** files populated with default values. The **setup-workspace.sh** script has a number of optional arguments for our purposes, we are only interested in the `odf` storage option.
 
     ```bash
-    ./setup-workspace.sh -s odf -n cp4d45 -r ca-tor
+    ./setup-workspace.sh -s odf -n cp4d45 -p ibm
     ```
    **Note**: all resources will be installed in the `cp4d45` resource group and prefixed with `cp4d45`
 
 6. Change the directory to the current workspace where the automation was configured (e.g. `/workspaces/current`).
-7. Inspect **cluster.tfvars** to see if there are any variables that should be changed. (The **setup-workspace.sh** script has generated **cluster.tfvars** with default values based on the environment variables set above and can be used without updates, if desired.)
-#### Run all the Terraform layers automatically
+7. Inspect **terraform.tfvars** to see if there are any variables that should be changed. (The **setup-workspace.sh** script has generated **cluster.tfvars** with default values based on the environment variables set above)
 
 ### Run Data Foundation automation
-
-This will enable ODF as the storage solution and install Cloud Pak for Data 4.5 Control Plane
 
 From the **/workspace/current** directory, run the following:
 
@@ -112,7 +120,8 @@ From the **/workspace/current** directory, run the following:
 ./apply-all.sh
 ```
 
-The script will run through each of the terraform layers in sequence to provision the entire infrastructure.
+The script will run through each of the terraform layers in sequence to provision the entire infrastructure and will enable ODF as the storage solution and install Cloud Pak for Data 4.5 Control Plane
+
 ## Helpful Links
 Link to the training on Software Everywhere Automation with Tim https://ibm.webex.com/ibm/ldr.php?RCID=b9355b6d3e3c577b7d9620263ce35653, (password: aWGcMAn3) if you want to rewatch it.
 
