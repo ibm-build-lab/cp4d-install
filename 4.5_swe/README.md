@@ -63,7 +63,7 @@ cd /workspace/current/105-ibm-vpc-openshift
 ```
 
 ## Install Data Foundation
-Currently the Data Foundation automation just installs the Cloud Pak for Data Lite components.  Eventually, it will add additional services on.
+Currently the Data Foundation automation just installs the Cloud Pak for Data Lite components.  
 
 ### Setup
 The following steps are customized from the steps [here](https://github.com/IBM/automation-data-foundation#set-up-environment-credentials):
@@ -124,6 +124,10 @@ From the **/workspace/current** directory, run the following:
 ```
 
 The script will run through each of the terraform layers in sequence to provision the entire infrastructure and will enable ODF as the storage solution and install Cloud Pak for Data 4.5 Control Plane
+
+## Install Data Fabric
+
+TBD
 
 ## Helpful Links
 Link to the training on Software Everywhere Automation with Tim https://ibm.webex.com/ibm/ldr.php?RCID=b9355b6d3e3c577b7d9620263ce35653, (password: aWGcMAn3) if you want to rewatch it.
