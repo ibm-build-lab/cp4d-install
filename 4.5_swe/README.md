@@ -51,7 +51,7 @@ The following steps are customized from the steps [here](https://github.com/IBM/
     ```
     cd /workspaces/current/
     ```
-7. Inspect **cluster.tfvars** to see if there are any variables that should be changed. (The **setup-workspace.sh** script has generated these with default values based on the environment variables set above)
+7. Inspect **cluster.tfvars** to see if there are any variables that should be changed. (The **setup-workspace.sh** script has generated this with default values based on the environment variables set above)
 
 ### Run only the OpenShift Cluster modules
 
@@ -113,7 +113,7 @@ The following steps are customized from the steps [here](https://github.com/IBM/
    **Note**: all resources will be installed in the `cp4d45` resource group and prefixed with `cp4d45`
 
 6. Change the directory to the current workspace where the automation was configured (e.g. `/workspaces/current`).
-7. Inspect **terraform.tfvars** to see if there are any variables that should be changed. (The **setup-workspace.sh** script has generated **cluster.tfvars** with default values based on the environment variables set above)
+7. Inspect **terraform.tfvars** to see if there are any variables that should be changed. (The **setup-workspace.sh** script has generated this with default values based on the environment variables set above)
 
 ### Run Data Foundation automation
 
