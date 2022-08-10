@@ -129,6 +129,31 @@ The script will run through each of the terraform layers in sequence to provisio
 
 TBD
 
+## Destroy Resources
+
+To destroy created resources, change into the automation directory you created the resources from and exec into ibmcloud environment container:
+```
+cd automation-data-foundation
+./launch.sh
+```
+Locate and change into the appropriate workspace under `/workspaces` in the container to find your configuration. If you ran all of the automation levels
+:
+```
+cd /workspaces/workspace-*********
+terraform init
+./destroy-all.sh
+```
+If you only ran a sub automation:
+```
+cd /workspaces/workspace-*********/105-ibm-vpc-openshift
+terraform init
+./destroy.sh
+```
+
+## General Notes
+
+- The `launch.sh` script stops the cloud environment container and restarts it, so if you are running another `launch.sh` in a different window, the process will be killed. Basically, you can't multitask with `launch.sh`.  
+
 ## Helpful Links
 Link to the training on Software Everywhere Automation with Tim https://ibm.webex.com/ibm/ldr.php?RCID=b9355b6d3e3c577b7d9620263ce35653, (password: aWGcMAn3) if you want to rewatch it.
 
