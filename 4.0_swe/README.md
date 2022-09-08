@@ -62,7 +62,7 @@ cd /workspace/current/105-ibm-vpc-openshift
 ./apply.sh
 ```
 
-## Install Data Foundation
+## Install Data Foundation and ODF
 Currently the Data Foundation automation just installs the Cloud Pak for Data Lite components.  
 
 ### Setup
