@@ -97,6 +97,6 @@ More information [here](https://ibm.github.io/cloud-pak-deployer/cp-deploy/run/e
    ```
    ./cp-deploy.sh env apply --accept-all-licenses -v
    ```
-    Use the -v flag to show more debug statements.
+Use the -v flag to show more debug statements.
 
 ### 7. Verify that the desired CP4D services have installed on your cluster
