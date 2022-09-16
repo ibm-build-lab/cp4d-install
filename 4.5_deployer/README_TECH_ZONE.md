@@ -4,6 +4,8 @@ The following steps have been customized from [Tech Zone Automation](https://git
 
 NOTE: The scripts at the `automation-ibmcloud-infra-openshift` level will run the `1-quickstart` automation by default.  Therefore, do not run anything from the `1-quickstart` subdirectory
 
+Make sure that Docker Desktop is running.
+
 ## Set up environment
 
 1. Clone repository to your local laptop or into a secure terminal. Open a shell into the cloned directory.
