@@ -90,7 +90,7 @@ c. Retrieve the cluster login command from the OpenShift UI and save that in the
 
     ./cp-deploy.sh vault set \
     --vault-secret cp4d45-cluster-oc-login \
-    --vault-secret-value "oc login --token=sha256~LnsX4GCe0zcL3RlRrJMqRqeTWvnlamczxm1HAFy7230 --server=https://c104-e.ca-tor.containers.cloud.ibm.com:30259 --insecure-skip-tls-verify"
+    --vault-secret-value "oc login --token=<sha token> --server=https://c104-e.ca-tor.containers.cloud.ibm.com:30259 --insecure-skip-tls-verify"
 
 More information [here](https://ibm.github.io/cloud-pak-deployer/cp-deploy/run/existing-openshift).
 
