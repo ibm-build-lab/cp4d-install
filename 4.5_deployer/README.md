@@ -79,7 +79,7 @@ a. Login
     ibmcloud login -sso
     ibmcloud ks cluster config -c <cluster name or id> --admin
 
-b. Store Kube config
+b. Store cluster config file or OpenShift login credentials
 
     ./cp-deploy.sh vault set \
     --vault-secret kubeconfig \
