@@ -74,7 +74,7 @@ Edit `/tmp/data/config/sample/cp4d-450.yaml` to
   
 ### 5. Login to the OpenShift cluster:
 
-a. Login
+a. Login and download the cluster config
 
     ibmcloud login -sso
     ibmcloud ks cluster config -c <cluster name or id> --admin
@@ -86,6 +86,7 @@ b. Store cluster config file or OpenShift login credentials
     --vault-secret-file ~/.kube/config
     
 or
+c. Retrieve the cluster login command from the OpenShift UI and save that in the vault
 
     ./cp-deploy.sh vault set \
     -vs cp4d45-cluster-oc-login \
