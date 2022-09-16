@@ -43,7 +43,8 @@ See https://ibm.github.io/cloud-pak-deployer/cp-deploy/install for more informat
     mkdir -p $CONFIG_DIR/defaults
     mkdir -p $CONFIG_DIR/inventory
 
-### 3. Create a `$CONFIG_DIR/config/ocp-config.yaml` file with the following:
+### 3. Create an OpenShift config file
+Create `$CONFIG_DIR/config/ocp-config.yaml` file with the following:
    ```yaml
    ---
    global_config:
@@ -61,7 +62,8 @@ See https://ibm.github.io/cloud-pak-deployer/cp-deploy/install for more informat
    ```
    Customize the `name`, `ocp_version`, `cluster_name`, `domain_name` and `openshift_storage`.
 
-### 4. Copy and customize cp4d configuration file
+### 4. Create a cp4d config file
+Copy and customize the following configuration file
 
     cp ./sample-configurations/roks-ocs-cp4d/cp4d-450.yaml $CONFIG_DIR/config
 
