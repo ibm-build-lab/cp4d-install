@@ -54,12 +54,12 @@ Create `$CONFIG_DIR/config/ocp-config.yaml` file with the following:
 
    openshift:
    - name: "cp4d45-cluster"
-     ocp_version: 4.10
+     ocp_version: "4.10"
      cluster_name: "c104-e"
      domain_name: ca-tor.containers.cloud.ibm.com
      openshift_storage:
-     - storage_name: nfs-storage
-       storage_type: nfs
+     - storage_name: ocs-storagecluster-ceph-rbd
+       storage_type: ocs
    ```
    Customize the `name`, `ocp_version`, `cluster_name`, `domain_name` and `openshift_storage`.
 
@@ -69,9 +69,17 @@ Copy and customize the following configuration file
     cp ./sample-configurations/roks-ocs-cp4d/config/cp4d-450.yaml $CONFIG_DIR/config
 
 Edit `$CONFIG_DIR/config/cp4d-450.yaml` to
-- Set `openshift_cluster_name` to the value of `cluster_name` from the `ocp-config.yaml` in previous step
+- Set `openshift_cluster_name` to the name of the cluster
 - Accept the license
 - Turn on any services to install (mark their state as `installed`)
+   ```
+   - project: zen-45
+     openshift_cluster_name: "cp4d45-cluster"
+     cp4d_version: 4.5.0
+     olm_utils: True
+     use_case_files: True
+     accept_licenses: True
+  ```
   
 ### 5. Login to the OpenShift cluster:
 
