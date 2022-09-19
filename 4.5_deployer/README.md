@@ -34,6 +34,7 @@ See https://ibm.github.io/cloud-pak-deployer/cp-deploy/install for more informat
 
 ### 2. Set the CP4D entitlement key, create a Config folder and Status folder (not in the cp-deployer folder):
 
+    export IBM_CLOUD_API_KEY=<account api key>
     export CP_ENTITLEMENT_KEY=<your_cp_entitlement_key>
     # Retrieve from https://myibm.ibm.com/products-services/containerlibrary
     export STATUS_DIR=~/data/deploy/status/sample
