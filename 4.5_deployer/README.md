@@ -39,7 +39,7 @@ See https://ibm.github.io/cloud-pak-deployer/cp-deploy/install for more informat
     export STATUS_DIR=~/data/deploy/status/sample
     mkdir -p $STATUS_DIR
     export CONFIG_DIR=~/data/deploy/config/sample
-    mkdir -p $CONFIG_DIR
+    mkdir -p $CONFIG_DIR/config
     mkdir -p $CONFIG_DIR/defaults
     mkdir -p $CONFIG_DIR/inventory
 
