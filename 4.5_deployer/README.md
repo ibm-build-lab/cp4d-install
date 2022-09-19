@@ -65,7 +65,7 @@ Create `$CONFIG_DIR/config/ocp-config.yaml` file with the following:
 ### 4. Create a cp4d config file
 Copy and customize the following configuration file
 
-    cp ./sample-configurations/roks-ocs-cp4d/cp4d-450.yaml $CONFIG_DIR/config
+    cp ./sample-configurations/roks-ocs-cp4d/config/cp4d-450.yaml $CONFIG_DIR/config
 
 Edit `/tmp/data/config/sample/cp4d-450.yaml` to
 - Accept the license
