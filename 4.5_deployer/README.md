@@ -36,9 +36,9 @@ See https://ibm.github.io/cloud-pak-deployer/cp-deploy/install for more informat
 
     export CP_ENTITLEMENT_KEY=<your_cp_entitlement_key>
     # Retrieve from https://myibm.ibm.com/products-services/containerlibrary
-    export STATUS_DIR=/tmp/data/deploy/status/sample
+    export STATUS_DIR=~/data/deploy/status/sample
     mkdir -p $STATUS_DIR
-    export CONFIG_DIR=/tmp/data/deploy/config/sample
+    export CONFIG_DIR=~/data/deploy/config/sample
     mkdir -p $CONFIG_DIR
     mkdir -p $CONFIG_DIR/defaults
     mkdir -p $CONFIG_DIR/inventory
