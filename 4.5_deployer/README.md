@@ -67,7 +67,7 @@ Copy and customize the following configuration file
 
     cp ./sample-configurations/roks-ocs-cp4d/config/cp4d-450.yaml $CONFIG_DIR/config
 
-Edit `/tmp/data/config/sample/cp4d-450.yaml` to
+Edit `$CONFIG_DIR/config/cp4d-450.yaml` to
 - Accept the license
 - Turn on any services to install (mark their state as `installed`)
 - Set `openshift_cluster_name` to the value of `cluster_name` from the `ocp-config.yaml` in previous step
