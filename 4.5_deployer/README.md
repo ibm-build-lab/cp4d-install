@@ -57,7 +57,7 @@ Create `$CONFIG_DIR/config/ocp-config.yaml` file with the following:
      ocp_version: 4.10
      cluster_name: "c104-e"
      domain_name: ca-tor.containers.cloud.ibm.com
-     openshift_storage: ocs-storagecluster-ceph-rbd
+     openshift_storage:
      - storage_name: nfs-storage
        storage_type: nfs
    ```
