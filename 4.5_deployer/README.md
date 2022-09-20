@@ -46,7 +46,7 @@ See https://ibm.github.io/cloud-pak-deployer/cp-deploy/install for more informat
     mkdir -p $CONFIG_DIR/defaults
     mkdir -p $CONFIG_DIR/inventory
 
-### 3. Create an OpenShift config file
+### 3. Create an OpenShift config file with your existing cluster information
 Create `$CONFIG_DIR/config/ocp-config.yaml` file with the following:
    ```yaml
    ---
