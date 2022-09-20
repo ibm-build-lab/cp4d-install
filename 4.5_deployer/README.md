@@ -111,3 +111,14 @@ More information [here](https://ibm.github.io/cloud-pak-deployer/cp-deploy/run/e
 Use the -v flag to show more debug statements.
 
 ### 7. Verify that the desired CP4D services have installed on your cluster
+
+user="admin"
+
+```
+oc get route -n zen-45 cpd -o json | jq -r .spec.host
+oc -n zen-45 get secret admin-user-details -o jsonpath='{.data.initial_admin_password}' | base64 -d && echo
+
+```
+### 8. Post run changes
+
+Follow the steps in https://ibm.github.io/cloud-pak-deployer/cp-deploy/post-run to update the Vault passwords
