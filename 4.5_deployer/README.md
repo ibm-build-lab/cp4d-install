@@ -25,6 +25,7 @@ b. Clone the deployer utility directory
    git clone https://github.com/IBM/cloud-pak-deployer.git
    ```
    NOTE: if running from a MacOS, you may need to fix the `cp-deploy.sh` script to remove the `:z` from paths on lines 726, 730. See https://github.com/containers/podman/issues/13631
+   
 c. Build the image:
    ```
    cd cloud-pak-deployer
