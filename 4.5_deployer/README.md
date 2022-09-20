@@ -110,7 +110,7 @@ More information [here](https://ibm.github.io/cloud-pak-deployer/cp-deploy/run/e
    ```
 Use the -v flag to show more debug statements.
 
-### 7. Verify that the desired CP4D services have installed on your cluster
+### 7. Verify that the desired CP4D services have been installed on your cluster
 
 User: 
 "admin"
