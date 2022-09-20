@@ -112,10 +112,15 @@ Use the -v flag to show more debug statements.
 
 ### 7. Verify that the desired CP4D services have installed on your cluster
 
-user="admin"
+user: 
+"admin"
 
+Route, run:
 ```
 oc get route -n zen-45 cpd -o json | jq -r .spec.host
+```
+Password, run:
+```
 oc -n zen-45 get secret admin-user-details -o jsonpath='{.data.initial_admin_password}' | base64 -d && echo
 
 ```
