@@ -6,7 +6,7 @@ These are steps to install Cloud Pak for Data 4.5 on a VPC cluster using the Clo
 
 Create a VPC cluster with OpenShift 4.10 and ODF installed that is at least 6 nodes of type 16x64.  There are a couple methods to create this:
 
-- Using [Cloud Pak Sandbox Automation](https://github.com/ibm-build-labs/cloud-pak-sandboxes/tree/main/terraform/roks_with_odf)
+- Using [Cloud Pak Sandbox Automation](https://github.com/ibm-build-labs/cloud-pak-sandboxes/tree/main/terraform/roks_with_odf/README.md)
 
 - Using [Tech Zone Accelerator Toolkit](./README_TECH_ZONE.md)
 
