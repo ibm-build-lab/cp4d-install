@@ -19,6 +19,12 @@ Once the application is approved, go `Manage my SSO registrations` in the [SSO P
 ## Configure Single Sign On 
 
 ### Enable SAML 
+
+Log into cluster
+```
+ibmcloud login -sso
+ibmcloud ks cluster config -c <cluster_name> --admin
+```
 Run the following command to exec into user management pod and create a `samlConfig.json` file:
 ```
 oc exec -it -n <namespace> $(oc get pod -n zen-45  -l component=usermgmt | tail -1 | cut -f1 -d\ ) \
