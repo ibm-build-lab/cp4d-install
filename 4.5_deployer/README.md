@@ -152,12 +152,12 @@ Follow the steps in https://ibm.github.io/cloud-pak-deployer/cp-deploy/post-run 
    Example of samlConfig.json:
    ```
    {
-     "entryPoint": "https://w3id-prod.ice.ibmcloud.com/saml/sps/saml20ip/saml20",
+     "entryPoint": "https://login.w3.ibm.com/saml/sps/saml20ip/saml20/login",
      "fieldToAuthenticate": "emailAddress",
      "spCert": "",
      "idpCert": "<value for X509Certificate from IDP Metadata File>",
      "issuer": "buildlab-latrng-cpd",
-     "identifierFormat": "<md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat>",
+     "identifierFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
      "callbackUrl": "https://cpd-zen-45.cp4d45-cluster-2bef1f4b4097001da9502000c44fc2b2-0000.ca-tor.containers.appdomain.cloud/auth/login/sso/callback"
    }
    ```
