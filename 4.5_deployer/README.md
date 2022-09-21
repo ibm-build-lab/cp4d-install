@@ -128,48 +128,4 @@ oc -n zen-45 get secret admin-user-details -o jsonpath='{.data.initial_admin_pas
 
 Follow the steps in https://ibm.github.io/cloud-pak-deployer/cp-deploy/post-run to update the Vault passwords
 
-### 9. Configure SSO for CP4D UI
-
-- To board the CP4D Application, submit this form https://ies-provisioner.prod.identity-services.intranet.ibm.com/tools/sso/w3id/application/register?execution=e1s1
-
-   Use the following values:
-   - set `Home Page` to cp4d ui url (i.e. https://cpd-zen-45.cp4d45-cluster-2bef1f4b4097001da9502000c44fc2b2-0000.ca-tor.containers.appdomain.cloud)
-   - for `w3id Protocol Selection` choose `SAML 2.0`
-   - for `Select Identity Provider` choose `preproduction` or `production`
-   - for `Target Application URL` enter `<cp4d ui url>/auth/login/sso/callback`
-   - for `Entity ID` enter something unique like `buildlab-cpd`
-   - for `ACS HTTP Post URIs` enter same value as the `Target Application URL`
-   - for `MFA Access Policy` choose `Default policy (IBM-only)`
-
-- Once the application is approved, go into the "Manage my SSO registrations" in the **SSO Self-Service Provisioner** tool, edit the application and download the IDP Metadata File located under `Identity Provider`
-- Configure Single Sign On according to [these](https://www.ibm.com/docs/en/cloud-paks/cp-data/4.5.x?topic=environment-configuring-sso) steps.
-
-   Enable SAML by running the following command:
-   ```
-   oc exec -it -n zen-45 $(oc get pod -n zen-45  -l component=usermgmt | tail -1 | cut -f1 -d\ ) \
-   -- bash -c "vi /user-home/_global_/config/saml/samlConfig.json"
-   ```
-   Example of samlConfig.json:
-   ```
-   {
-     "entryPoint": "https://login.w3.ibm.com/saml/sps/saml20ip/saml20/login",
-     "fieldToAuthenticate": "emailAddress",
-     "spCert": "",
-     "idpCert": "<value for X509Certificate from IDP Metadata File>",
-     "issuer": "buildlab-latrng-cpd",
-     "identifierFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
-     "callbackUrl": "https://cpd-zen-45.cp4d45-cluster-2bef1f4b4097001da9502000c44fc2b2-0000.ca-tor.containers.appdomain.cloud/auth/login/sso/callback"
-   }
-   ```
-   Restart the pods:
-   ```
-   oc delete pods -l component=usermgmt -n zen-45
-   ```
-
-For more information, see the following links:
-- SSO Provisioner Tool: http://w3.ibm.com/tools/sso
-- Boarding instructions: https://w3.ibm.com/w3publisher/w3idsso/boarding
-- https://w3.ibm.com/w3publisher/w3idsso/boarding/saml-boarding-troubleshooting
-- https://ibm.ent.box.com/file/1003210631769 
-- https://ibm.ent.box.com/s/asxizmc95kodf00x78en9bs8qgfp04h4
 
