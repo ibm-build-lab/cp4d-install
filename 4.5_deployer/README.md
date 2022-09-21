@@ -128,7 +128,7 @@ oc -n zen-45 get secret admin-user-details -o jsonpath='{.data.initial_admin_pas
 
 Follow the steps in https://ibm.github.io/cloud-pak-deployer/cp-deploy/post-run to update the Vault passwords
 
-### 9. Set up SAML connection with w3id
+### 9. Configure SSO for CP4D UI
 
 - Submit this form https://ies-provisioner.prod.identity-services.intranet.ibm.com/tools/sso/w3id/application/register?execution=e1s1
    Use the following values:
@@ -140,5 +140,8 @@ Follow the steps in https://ibm.github.io/cloud-pak-deployer/cp-deploy/post-run 
    - for `ACS HTTP Post URIs` choose same value as the `Target Application URL`
    - for `MFA Access Policy` choose `Default policy (IBM-only)`
 
-- Once the application is approved, go into the "Manage my SSO registrations" in the SSO Self-Service Provisioner tool and download the service Provide Metadata file
+- Once the application is approved, go into the "Manage my SSO registrations" in the SSO Self-Service Provisioner tool and download the IDP Metadata File located under `Identity Provider` Metadata file
 - Configure Single Sign On according to these steps https://www.ibm.com/docs/en/cloud-paks/cp-data/4.0?topic=client-configuring-sso
+
+See https://ibm.ent.box.com/file/1003210631769 for more information
+
