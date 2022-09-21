@@ -130,4 +130,4 @@ Follow the steps in https://ibm.github.io/cloud-pak-deployer/cp-deploy/post-run 
 
 ### 9. Enable SSO
 
-For steps to enable SSO for this application go [here](./README_TECH_ZONE.md)
+For steps to enable SSO for this application go [here](./SSO_README.md)
