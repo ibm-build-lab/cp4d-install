@@ -8,7 +8,7 @@ Create a VPC cluster with OpenShift 4.10 and ODF installed that is at least 6 no
 
 - Using [Cloud Pak Sandbox Automation](https://github.com/ibm-build-labs/cloud-pak-sandboxes/tree/main/terraform/roks_with_odf)
 
-- Using [Tech Zone Automation](./README_TECH_ZONE.md)
+- Using [Tech Zone Accelerator Toolkit](./README_TECH_ZONE.md)
 
 
 ## Install Cloud Pak For Data 4.5 using the Cloud Pak Deployer
@@ -128,4 +128,6 @@ oc -n zen-45 get secret admin-user-details -o jsonpath='{.data.initial_admin_pas
 
 Follow the steps in https://ibm.github.io/cloud-pak-deployer/cp-deploy/post-run to update the Vault passwords
 
+### 9. Enable SSO
 
+For steps to enable SSO for this application go [here](./README_TECH_ZONE.md)
