@@ -33,11 +33,11 @@ spec:
             operator: In
             values:
             - database-db2oltp
-        tolerations:
-        - key: "icp4data"
-          operator: "Equal"
-          value: "database-db2oltp"
-          effect: "NoSchedule"
+  tolerations:
+  - key: "icp4data"
+    operator: "Equal"
+    value: "database-db2oltp"
+    effect: "NoSchedule"
 ```
 ### Run example
 ```
@@ -61,10 +61,22 @@ db2_rwx_storage_class        = "ocs-storagecluster-cephfs"
 db2_rwo_storage_class        = "ibmc-vpc-block-10iops-tier"
 ```
 ## References:
-### Db2 versions for different Cloud Pak for Data versions
+- Db2 versions for different Cloud Pak for Data versions
 https://www.ibm.com/docs/en/cloud-paks/cp-data/4.5.x?topic=install-db2-versions-different-cloud-pak-data-versions
 
-### Db2 Operators and their associated Db2 engines
+- Db2 Operators and their associated Db2 engines
 https://www.ibm.com/docs/en/db2/11.5?topic=deployments-db2-red-hat-openshift
 
+- Setting up dedicated nodes for your Db2 deployment
+https://www.ibm.com/docs/en/cloud-paks/cp-data/4.5.x?topic=install-setting-up-dedicated-nodes
+
+- Creating a database deployment on the cluster (Db2)
 https://www.ibm.com/docs/en/cloud-paks/cp-data/4.5.x?topic=setup-creating-database-deployment#provision-db-aese
+
+- Deploying Db2 using the Db2uCluster custom resource
+https://www.ibm.com/docs/en/db2/11.5?topic=db2-deploying-using-db2ucluster-cr
+
+- Kubernetes Taints and Tolerations
+https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
+
+
