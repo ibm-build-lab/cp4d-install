@@ -1,6 +1,6 @@
 # Db2 on Cloud Pak for Data 4.5 on VPC cluster using ODF storage
 
-These steps help provision a DB2 instance on a VPC cluster running CP4D 4.5. They assume a dedicated node is going to be used.  They will also connect the DB2 cluster to the CP4D client.
+These steps help provision a DB2 instance on a VPC cluster running CP4D 4.5. They assume a dedicated node is going to be used.  They will also connect the DB2 cluster to the CP4D client.  Go [here](./CP_DEPLOYER_README.md) for details on how to provision a cluster and install CP4D 4.5.
 
 ## Setting up dedicated node for Db2 deployment
 
