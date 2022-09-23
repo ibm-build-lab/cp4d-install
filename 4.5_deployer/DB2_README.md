@@ -6,10 +6,9 @@ https://www.ibm.com/docs/en/cloud-paks/cp-data/4.5.x?topic=db2-preparing-install
 
 ## Setting up dedicated nodes for Db2 deployment
 
-Follow the steps here:
-https://www.ibm.com/docs/en/cloud-paks/cp-data/4.5.x?topic=install-setting-up-dedicated-nodes
+Follow the steps [here](https://www.ibm.com/docs/en/cloud-paks/cp-data/4.5.x?topic=install-setting-up-dedicated-nodes) to `taint` a dedicated node
 
-use `icp4data=database-db2oltp` as the label.
+Use `icp4data=database-db2oltp` as the label.
 
 ## Install and deploy DB2
 
@@ -20,7 +19,7 @@ DB2 can easily be deployed using the Cloud Pak Sandbox TF example [here](https:/
 git clone https://github.com/ibm-build-labs/terraform-ibm-cloud-pak.git
 cd modules/db2
 ```
-### Add Node affinity
+### Add Node affinity and toleration to run on dedicated node labeled in step above
 Edit the `templates/db2u_cluster.yaml.tmpl` file to include the node affinity descriptor for dedicated node:
 ```
 spec:
