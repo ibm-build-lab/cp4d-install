@@ -1,6 +1,6 @@
 # This Repository contains Instruction steps to help install Cloud Pak for Data 4.0 and additional assemblies
 
-[Installation using the Tech Zone Automation modules](./SWE_Install.md)
+[Installation using the Tech Zone Automation modules](./SWE_INSTALL.md)
 
 [Manual installation using operators](./Manual_Install.md)
 
