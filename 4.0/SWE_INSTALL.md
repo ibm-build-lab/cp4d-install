@@ -155,9 +155,10 @@ terraform init
 - The `launch.sh` script stops the cloud environment container and restarts it, so if you are running another `launch.sh` in a different window, the process will be killed. Basically, you can't multitask with `launch.sh`.  
 
 ## Helpful Links
-Link to the training on Software Everywhere Automation with Tim https://ibm.webex.com/ibm/ldr.php?RCID=b9355b6d3e3c577b7d9620263ce35653, (password: aWGcMAn3) if you want to rewatch it.
+Link to the training on TechZone Automation with Tim Robinson
+https://ibm.webex.com/ibm/ldr.php?RCID=b9355b6d3e3c577b7d9620263ce35653, (password: aWGcMAn3).
 
-- Software Everywhere catalog https://modules.cloudnativetoolkit.dev/
+- TechZone Automation catalog https://modules.cloudnativetoolkit.dev/
 - GitOps template https://github.com/cloud-native-toolkit/template-terraform-gitops
 - Terraform module template https://github.com/cloud-native-toolkit/template-terraform-module
 - `iascable` tool (Library and CLI used to generate Infrastructure as Code installable components composed from a catalog of modules.) https://github.com/cloud-native-toolkit/iascable
