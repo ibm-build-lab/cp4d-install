@@ -1,4 +1,4 @@
-# Notes for installting CP4D on ROKS via catalog
+# Notes for installing CP4D on ROKS via catalog
 1. Use `zen` as the project name
 
 2. Get the URL of the Cloud Pak for Data web client once `lite` assembly is installed
