@@ -1,4 +1,4 @@
-# General CP4D Install on ROKS Cluster
+# General CP4D Install on ROKS Cluster using Operators
 
 ## Creating projects (namespaces) on ROKS cluster
 1. Create these projects:
