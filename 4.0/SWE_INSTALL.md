@@ -1,14 +1,14 @@
 # Installing Cloud Pak for Data 4.0 using the Tech Zone Automation GitOps modules
 
-These are steps to install Cloud Pak for Data 4.0 on a VPC cluster using automation created by the Software Everywhere modules.
-
-The automation resides in: 
+These are steps to install Cloud Pak for Data 4.0 on a VPC cluster using automation created by the Tech Zone Automation modules residing in:
 
 https://github.com/IBM/automation-ibmcloud-infra-openshift
 
 and
 
 https://github.com/IBM/automation-data-foundation
+
+Refer to the README.md files for details about installation.
 
 This automation will be running within a container, for best results, make sure you have a license for Docker Desktop.
 
@@ -37,7 +37,7 @@ The following steps are customized from the steps [here](https://github.com/IBM/
     cluster_force_delete_storage="true"
     odf_namespace_name="odf"
     ```
-6. Run 
+5. Run 
     ```
     ./launch.sh 
     ```
