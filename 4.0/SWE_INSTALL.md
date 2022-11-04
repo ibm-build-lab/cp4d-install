@@ -46,6 +46,8 @@ The following steps are customized from the steps [here](https://github.com/IBM/
     ```bash
     ./setup-workspace.sh -n cp4d40 -r ca-tor -s odf
     ```
+    Choose `Quickstart` when prompted.
+    
     This creates a "workspace" where you will run the terraform.
    **Note**: a resource group will be created and all resources will be prefixed from the -n value 
 6. Change the directory to the current workspace where the automation was configured 
