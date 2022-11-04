@@ -143,6 +143,12 @@ The script will run through each of the terraform layers in sequence to provisio
 
 TBD
 
+## Finding console and login information
+
+URL: go to `Routes` in the OpenShift Console and change project to `cp4d`.  You should find the route listed.
+User: `admin`
+Password: Reveal value for `admin-user-details` secret in the `cp4d` project.
+
 ## Destroy Resources
 
 To destroy created resources, change into the automation directory you created the resources from and exec into ibmcloud environment container:
