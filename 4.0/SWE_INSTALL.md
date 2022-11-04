@@ -96,9 +96,9 @@ The following steps are customized from the steps [here](https://github.com/IBM/
       ```bash
       TF_VAR_ibmcloud_api_key=**********************
       TF_VAR_gitops_repo_host=github.com
-      TF_VAR_gitops_repo_username=annumberhocker
+      TF_VAR_gitops_repo_username=*********
       TF_VAR_gitops_repo_token=************************ # Go to your github profile->settings->developer settings, choose personal access token, choose `repo` and `delete_repo` permissions.
-      TF_VAR_gitops_repo_org=ann-gitops # I created my own org under my private username to isolate the repos created by ArgoCD 
+      TF_VAR_gitops_repo_org=******** # If you created org under private username to isolate the repos created by ArgoCD 
       TF_VAR_server_url=https://c104-e.ca-tor.containers.cloud.ibm.com:31655
       TF_VAR_cluster_login_token=******************
       TF_VAR_entitlement_key=****************************************
