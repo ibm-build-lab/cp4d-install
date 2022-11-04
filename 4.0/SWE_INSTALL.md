@@ -129,12 +129,12 @@ The following steps are customized from the steps [here](https://github.com/IBM/
 7. Inspect **terraform.tfvars** to see if there are any variables that should be changed. (The **setup-workspace.sh** script has generated this with default values based on the environment variables set above)
 
 ### Run Data Foundation automation
-NOTE:  If ODF is already installed on your cluster, just delete the odf subdirectory.
+NOTE:  If ODF is already installed on your cluster, delete the `210-ibm-odf-storage` subdirectory.
 
 From the **/workspace/current** directory, run the following:
 
 ```shell
-./apply.sh
+./apply-all.sh
 ```
 
 The script will run through each of the terraform layers in sequence to provision the entire infrastructure and will enable ODF as the storage solution and install Cloud Pak for Data 4.0 Control Plane
