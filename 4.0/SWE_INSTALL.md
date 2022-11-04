@@ -1,4 +1,4 @@
-# Installing Cloud Pak for Data 4.0 using the Software Everywhere automation
+# Installing Cloud Pak for Data 4.0 using the Tech Zone Automation GitOps modules
 
 These are steps to install Cloud Pak for Data 4.0 on a VPC cluster using automation created by the Software Everywhere modules.
 
