@@ -30,6 +30,7 @@ The following steps are customized from the steps [here](https://github.com/IBM/
 3. Uncomment and provide value for the **TF_VAR_ibmcloud_api_key** variable (API key for the IBM Cloud account where the infrastructure will be provisioned) in **credentials.properties**.
 4. Update **terraform.tfvars.template-quickstart** to uncomment and set for required infrastructure.  For example, for this exercise we are using: 
     ```
+    ocp_version="4.10"
     cluster_subnets__count="1"
     worker_count="6"
     cluster_flavor="bx2.16x64"
