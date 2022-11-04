@@ -116,6 +116,7 @@ The following steps are customized from the steps [here](https://github.com/IBM/
 7. Inspect **terraform.tfvars** to see if there are any variables that should be changed. (The **setup-workspace.sh** script has generated this with default values based on the environment variables set above)
 
 ### Run Data Foundation automation
+NOTE:  If ODF is already installed on your cluster, just delete the odf subdirectory.
 
 From the **/workspace/current** directory, run the following:
 
