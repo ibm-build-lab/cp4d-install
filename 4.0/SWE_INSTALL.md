@@ -65,6 +65,16 @@ cd /workspace/current/105-ibm-vpc-openshift
 ./apply.sh
 ```
 
+### Install OpenShift with other modules (i.e. odf, dev-tools)
+
+From the **/workspace/current** directory run the following:
+
+```shell
+./apply-all.sh
+```
+
+The script will run through each of the terraform layers in sequence to provision the entire infrastructure and will enable ODF as the storage solution 
+
 ## Install Data Foundation and ODF
 Currently the Data Foundation automation just installs the Cloud Pak for Data Lite components.  
 
@@ -127,7 +137,7 @@ From the **/workspace/current** directory, run the following:
 ./apply-all.sh
 ```
 
-The script will run through each of the terraform layers in sequence to provision the entire infrastructure and will enable ODF as the storage solution and install Cloud Pak for Data 4.5 Control Plane
+The script will run through each of the terraform layers in sequence to provision the entire infrastructure and will enable ODF as the storage solution and install Cloud Pak for Data 4.0 Control Plane
 
 ## Install Data Fabric
 
