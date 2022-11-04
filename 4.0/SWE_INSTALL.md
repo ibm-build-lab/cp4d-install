@@ -70,7 +70,7 @@ cd /workspace/current/105-ibm-vpc-openshift
 From the **/workspace/current** directory run the following:
 
 ```shell
-./apply-all.sh
+./apply.sh
 ```
 
 The script will run through each of the terraform layers in sequence to provision the entire infrastructure and will enable ODF as the storage solution 
@@ -134,7 +134,7 @@ NOTE:  If ODF is already installed on your cluster, just delete the odf subdirec
 From the **/workspace/current** directory, run the following:
 
 ```shell
-./apply-all.sh
+./apply.sh
 ```
 
 The script will run through each of the terraform layers in sequence to provision the entire infrastructure and will enable ODF as the storage solution and install Cloud Pak for Data 4.0 Control Plane
